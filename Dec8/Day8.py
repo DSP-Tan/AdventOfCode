@@ -2,8 +2,7 @@ import numpy as np
 Lines=open("input.txt","r").read().split()
 matrix = np.array( [ [int(i) for i in j ] for j in [ list(i) for i in Lines ]] )
 N=matrix.shape[0]
-visible=np.zeros((N,N))
-visible[0,:] = visible [:,0] = visible[N-1,:] = visible [:,N-1] = 1
+edge= 4*N-4
 
 def trees(i,j):
     up    = np.flip(matrix[0:i,j] < matrix[i,j])
@@ -12,20 +11,16 @@ def trees(i,j):
     right = matrix[i,j+1:N] < matrix[i,j]
     return (up,down,left,right)
 
-def viz(i,j):
-    up, down, left, right = trees(i,j)
-    return all(up) or all(down) or all(left) or all(right)
-
+count= edge
 for i in range(1,N-1):
     for j in range(1,N-1):
-        visible[i,j] = viz(i,j)
-
-print(visible.sum())
-
+        up, down, left, right = trees(i,j)
+        count += all(up) or all(down) or all(left) or all(right)
+print(count)
 
 def scenic(i,j, direction):
     up, down, left, right = trees(i,j)
-    dir={"above":up,"below":down,"left":left,"right":right}
+    dir={"up":up,"down":down,"left":left,"right":right}
     count=0
     for tree in dir[direction]:
         if tree:
@@ -38,6 +33,6 @@ def scenic(i,j, direction):
 scenes=np.zeros((N,N))
 for i in range(1,N-1):
     for j in range(1,N-1):
-        counts = [ scenic(i,j,direc) for direc in ["above","below","left","right"] ]
+        counts = [ scenic(i,j,direc) for direc in ["up","down","left","right"] ]
         scenes[i,j] = counts[0]*counts[1]*counts[2]*counts[3]
 print(scenes.max())
