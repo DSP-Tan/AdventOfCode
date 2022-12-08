@@ -2,7 +2,6 @@ import numpy as np
 Lines=open("input.txt","r").read().split()
 matrix = np.array( [ [int(i) for i in j ] for j in [ list(i) for i in Lines ]] )
 N=matrix.shape[0]
-edge= 4*N-4
 
 def trees(i,j):
     up    = np.flip(matrix[0:i,j] < matrix[i,j])
@@ -11,7 +10,7 @@ def trees(i,j):
     right = matrix[i,j+1:N] < matrix[i,j]
     return (up,down,left,right)
 
-count= edge
+count= 4*N-4 # Edge trees are all visible
 for i in range(1,N-1):
     for j in range(1,N-1):
         up, down, left, right = trees(i,j)
