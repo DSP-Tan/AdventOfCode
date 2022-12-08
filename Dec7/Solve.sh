@@ -14,16 +14,17 @@ sed -e "s:\/:${PWD}:g"        \
 
 chmod +x Salve.sh && ./Salve.sh
 
-# Part 1
 directs=$(ls -R | grep : | tr ":" " ")
-for i in $directs ; do
-   ls -R $i | grep [0-9] | awk '{s+=$1} END {print s}'
-done                     | awk '{if($1<= 100000) s+=$1} END {print s}'
+weight_dir(){
+   for i in $directs ; do
+      ls -R $i | grep [0-9] | awk '{s+=$1} END {print s}' ; done }
+
+# Part 1
+weight_dir $directs | awk '{if($1<= 100000) s+=$1} END {print s}'
 
 # Part 2
 Total=70000000; Needs=30000000;
 UsedS=$(ls -R . | grep [0-9] | awk '{s+=$1} END {print s}')
 Smlst=$( echo "$Needs - ($Total - $UsedS)" | bc )
 
-for i in $directs ; do ls -R $i | grep [0-9] | awk '{s+=$1} END {print s}'
-done | awk '{if($1 >= '$Smlst') print $1}' | sort -n | head -n1
+weight_dir | awk '{if($1 >= '$Smlst') print $1}' | sort -n | head -n1
