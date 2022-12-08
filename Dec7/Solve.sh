@@ -20,7 +20,7 @@ weight_dir(){
       ls -R $i | grep [0-9] | awk '{s+=$1} END {print s}' ; done }
 
 # Part 1
-weight_dir $directs | awk '{if($1<= 100000) s+=$1} END {print s}'
+weight_dir  | awk '{if($1<= 100000) s+=$1} END {print s}'
 
 # Part 2
 Total=70000000; Needs=30000000;
