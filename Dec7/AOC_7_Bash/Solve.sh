@@ -12,8 +12,7 @@ weight_dir(){
 weight_dir  | awk '{if($1<= 100000) s+=$1} END {print s}'
 
 # Part 2
-Total=70000000; Needs=30000000;
 UsedS=$(ls -R . | grep [0-9] | awk '{s+=$1} END {print s}')
-Smlst=$( echo "$Needs - ($Total - $UsedS)" | bc )
+Smlst=$( echo "30000000 - (70000000 - $UsedS)" | bc )
 
 weight_dir | awk '{if($1 >= '$Smlst') print $1}' | sort -n | head -n1
