@@ -5,7 +5,6 @@ echo "#!/bin/bash" > Salve.sh
 
 sed -e "s:\/:${PWD}:g"        \
     -e "s:\$ cd:cd:g"         \
-    -e "s:\$ cd:cd:g"         \
     -e "s:dir:mkdir -p:g"     \
     -e "/\$ ls/d"             \
     -e '/^[1-9]/s/[^0-9]*//g' \
