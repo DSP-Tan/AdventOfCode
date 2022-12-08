@@ -1,11 +1,7 @@
-sed -e "s:\/:${PWD}:g"        \
-    -e "s:\$ cd:cd:g"         \
-    -e "s:\$ cd:cd:g"         \
-    -e "s:dir:mkdir -p:g"     \
-    -e "/\$ ls/d"             \
-    -e '/^[1-9]/s/[^0-9]*//g' \
-    -e "/^[1-9]/s/^/touch /g" \
-    ../input.txt >> Salve.sh
+sed -e "s:\/:${PWD}:g" -e "s:\$ cd:cd:g"         \
+    -e "s:\$ cd:cd:g"  -e "s:dir:mkdir -p:g"     \
+    -e "/\$ ls/d"      -e '/^[1-9]/s/[^0-9]*//g' \
+    -e "/^[1-9]/s/^/touch /g" ../input.txt >> Salve.sh
 chmod +x Salve.sh && ./Salve.sh
 
 directs=$(ls -R | grep : | tr ":" " ")
