@@ -3,15 +3,9 @@ Lines=open("input.txt","r").read().split()
 matrix = np.array( [ [int(i) for i in j ] for j in [ list(i) for i in Lines ]] )
 N=matrix.shape[0]
 
-def scenic(direction):
-    count=0
-    for tree in direction:
-        if tree:
-            count +=1
-        else:
-            count +=1
-            return count
-    return count
+def scenic(look):
+    negs = [ i for i, val in enumerate(look) if val==False ]
+    return look[:negs[0]].sum() +1 if negs else look.sum()
 
 scenes=np.zeros((N,N))
 visible = 4*N-4 # Edge trees are all visible
