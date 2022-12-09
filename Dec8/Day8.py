@@ -5,9 +5,9 @@ N=matrix.shape[0]
 
 def trees(i,j):
     up    = np.flip(matrix[0:i,j] < matrix[i,j])
-    down  = matrix[i+1:N,j] < matrix[i,j]
+    down  = matrix[i+1:N,j]       < matrix[i,j]
     left  = np.flip(matrix[i,0:j] < matrix[i,j])
-    right = matrix[i,j+1:N] < matrix[i,j]
+    right = matrix[i,j+1:N]       < matrix[i,j]
     return (up,down,left,right)
 
 count= 4*N-4 # Edge trees are all visible
