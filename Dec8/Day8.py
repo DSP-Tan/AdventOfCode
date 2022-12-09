@@ -17,7 +17,7 @@ for i in range(1,N-1):
         right = matrix[i,j+1:N]       < matrix[i,j]
 
         visible += all(up) or all(down) or all(left) or all(right)
-        counts = [ scenic(dir) for dir in [up,down,left,right] ]
-        scenes[i,j] = counts[0]*counts[1]*counts[2]*counts[3]
+        views    = [ scenic(dir) for dir in [up,down,left,right] ]
+        scenes[i,j] = views[0]*views[1]*views[2]*views[3]
 print(f"Part 1: {visible}")
 print(f"Part 2: {scenes.max()}")
