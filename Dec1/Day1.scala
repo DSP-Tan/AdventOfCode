@@ -15,14 +15,20 @@ def max_below(input:String, below: Int): Int ={
     return max
     }
 
-var max1= max_below("example.txt", 99999999)
-var max2= max_below("example.txt", max1)
-var max3= max_below("example.txt", max2)
-//println(max1)
-//println(max1+max2+max3)
+// Part 1
+var init: Int=99999
+var sum: Int=0
+for(i<-Range(0,1)){
+    init= max_below("input.txt",init)
+    sum +=init
+    }
+println(sum)
 
-max1= max_below("input.txt", 99999999)
-println(max1)
-max2= max_below("input.txt", max1)
-max3= max_below("input.txt", max2)
-println(max1+max2+max3)
+//Part 2
+var init: Int=99999
+var sum: Int=0
+for(i<-Range(0,3)){
+    init= max_below("input.txt",init)
+    sum +=init
+    }
+println(sum)
