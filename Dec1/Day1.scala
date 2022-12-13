@@ -1,52 +1,28 @@
 import scala.io.Source
 
-val filename = "example.txt"
-for (line <- Source.fromFile(filename).getLines)
-    println(line)
-
-//val lines = Source.fromFile(filename).getLines.toArray
-
-val n_elves: Int= Source.fromFile(filename).getLines.toList.count(_=="")+1
-
-def calorific(input:String): Int ={
-   val lines = Source.fromFile(input).getLines.toList
-   var count :Int = 0
+def max_below(input:String, below: Int): Int ={
+   val Lines = Source.fromFile(input).getLines.toList
+   var cals  :Int = 0
    var max   :Int = 0
-   for(line<-lines)
-       if(line !=""){
-           count = count + line.toInt
-       }else{
-           if(max<count){
-              max=count
-              }
-           count=0
-           }
-   return max
-   }
-
-println(calorific("example.txt"))
-println(calorific("input.txt")  )
-
-def top_3_cals(input:String): Int ={
-   val lines = Source.fromFile(input).getLines.toList
-   var count  :Int = 0
-   var max1   :Int = 0
-   var max2   :Int = 0
-   var max3   :Int = 0
-   for(line<-lines)
-       if(line !=""){
-           count = count + line.toInt
-        } else if(max1<count){
-        max1=count
-        count=0
-        } else if(max1>count && count < max2){
-        max2=count
-        count=0
-        } else if(max2>count && count < max3){
-        max3=count
-        count=0
+   for(line<-Lines)
+      if( !line.isBlank() ){
+        cals = cals + line.toInt
+      }else{ 
+        if(max<cals && cals < below)
+           max=cals
+        cals =0
         }
-   return max1+max2+max3
-   }
-println(top_3_cals("example.txt"))
-println(top_3_cals("input.txt")  )
+    return max
+    }
+
+var max1= max_below("example.txt", 99999999)
+var max2= max_below("example.txt", max1)
+var max3= max_below("example.txt", max2)
+//println(max1)
+//println(max1+max2+max3)
+
+max1= max_below("input.txt", 99999999)
+println(max1)
+max2= max_below("input.txt", max1)
+max3= max_below("input.txt", max2)
+println(max1+max2+max3)
