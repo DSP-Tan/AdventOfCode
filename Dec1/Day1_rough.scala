@@ -50,3 +50,23 @@ println(f"max3: $max3")
 // So what we gotta do is a recursive function, which takes the previous maximum.
 // First time it takes 0 and returns max1, then it takes max1 and returns max 2,
 // then it takes max 2 and returns max 3. This is also nice and scala style.
+
+
+def max_below(input:String, below: Int): Int ={
+   val lines = Source.fromFile(input).getLines.toList
+   var count :Int = 0
+   var max   :Int = 0
+   for(line<-lines)
+      if(line !=""){
+        count = count + line.toInt
+      }else if(max<count && count < below){
+        max=count
+        count=0
+        } 
+    return max
+    }
+
+max1= max_below("example.txt", 99999999)
+max2= max_below("example.txt", max1)
+max3= max_below("example.txt", max2)
+println(max1+max2+max3)
