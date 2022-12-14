@@ -35,13 +35,12 @@ def delve(left,right):
             return 0
 
 # Part 1
-Lines= [eval(i.strip('\n')) for i in open("input.txt").readlines() if i !="\n"]
-orders = [delve(Lines[i],Lines[i+1]) for i in range(0,len(Lines),2)]
+Lines =[ eval(i.strip('\n')) for i in open("input.txt").readlines() if i !="\n"]
+orders=[ delve(Lines[i],Lines[i+1]) for i in range(0,len(Lines),2)]
 print(sum([i+1 for i,val in enumerate(orders) if val==1]))
 
 # Part 2
-Lines.append([[2]])
-Lines.append([[6]])
+Lines.extend([[[2]],[[6]]])
 swaps=1
 while(swaps !=0):
     swaps=0
