@@ -1,6 +1,5 @@
 import numpy as np
 moves = [i.strip('\n').split() for i in open("input.txt").readlines()]
-for i in moves: i[1]= int(i[1])
 
 def react(head,tail):
     diff = head-tail
@@ -21,7 +20,7 @@ grid2[tuple(rope[9])] = 1
 
 mov_dict={"R":(0,1), "L":(0,-1), "U":(-1,0), "D":(1,0)}
 for move in moves:
-    for i in range(move[1]):
+    for i in range(int(move[1])):
         head += mov_dict[move[0]]
         tail = react(head,tail).astype(int)
         grid1[tuple(tail)] = 1

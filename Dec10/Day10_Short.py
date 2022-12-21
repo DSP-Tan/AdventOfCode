@@ -1,6 +1,5 @@
 Lines=[i.strip("\n").split() for i in open("input.txt").readlines()]
-cycle=1
-X=1
+X=cycle=1
 cycles=[(cycle,X)]
 
 for i in Lines:
