@@ -1,32 +1,29 @@
 import scala.io.Source
 
-val input :String = "example.txt"
-
+val input :String = "input.txt"
 val Lines = Source.fromFile(input).getLines().toList
-println(Lines)
 val Moves = for(line<-Lines) yield List(line(0),line(2))
-println(Moves)
 
+val score_me  = Map('X'->1,  'Y'->2,  'Z'->3,
+                   "AX"->3, "AY"->6, "AZ"->0,
+                   "BX"->0, "BY"->3, "BZ"->6,
+                   "CX"->6, "CY"->0, "CZ"->3)
+
+
+// Part 1
+var my_score: Int =0
 for(move<-Moves)
-  println(f"${move(0)} ${move(1)}")
+    my_score += score_me(move(1)) + score_me(s"${move(0)}${move(1)}")
+println(my_score)
 
+// Part 2
+val move_needed=Map("AX"->'C', "AY"->'A', "AZ"->'B',
+                    "BX"->'A', "BY"->'B', "BZ"->'C',
+                    "CX"->'B', "CY"->'C', "CZ"->'A')
+val Moves2 = for(move<-Moves) yield List(move(0),move(1), move_needed( s"${move(0)}${move(1)}") )
 
-//println(Lines(0))
-//println(Lines(1))
-//println(Lines(2))
-//println( Lines(2)(0) )
-
-//val m = Map("X" -> 1, "Y" -> 2, "Z" -> 3)
-//val P1_dic = Map("A":1, "B":2, "C":3)
-//val P2_dic = Map("X":1, "Y":2, "Z":3)
-//val score_elf = Map("A":1, "B":2, "C":3,
-//                   "AX":3, "AY":0, "AZ":6,
-//                   "BX":6, "BY":3, "BZ":0,
-//                   "CX":0, "CY":6, "CZ":3)
-//
-//val score_me  = Map("X":1,  "Y":2,  "Z":3,
-//               "AX":3, "AY":6, "AZ":0,
-//               "BX":0, "BY":3, "BZ":6,
-//               "CX":6, "CY":0, "CZ":3)
-//
-//println(m("X"))
+val score2 = Map('A'->1, 'B'->2, 'C'->3, 'X'->0, 'Y'->3, 'Z'->6)
+my_score=0
+for(move<-Moves2)
+    my_score += score2(move(1))+score2(move(2))
+println(my_score)
