@@ -1,29 +1,28 @@
 import scala.io.Source
 
 def max_below(input:String, below: Int): Int ={
-    val Lines = Source.fromFile(input).getLines().toList
-    var cals  :Int = 0
-    var max   :Int = 0
-    for(line<-Lines)
-       if( !line.isBlank() ){
-         cals +=  line.toInt
-       }else{
-         if(max<cals && cals < below)
-            max=cals
-         cals =0
-         }
-    return max
-    }
+  val Lines = Source.fromFile(input).getLines().toList
+  var cals  :Int = 0
+  var max   :Int = 0
+  for(line<-Lines)
+    if( !line.isBlank() ){
+      cals +=  line.toInt
+      }else{
+        if(max<cals && cals < below)
+          max=cals
+        cals =0
+        }
+  return max
+  }
 
 def sum_maxes(input: String, maxes: Int): Int ={
-    var init1: Int=99999
-    var sum:  Int=0
-    for(i<-Range(0,maxes)){
-        init1 = max_below(input,init1)
-        sum +=init1
-        }
-    return sum
-    }
+  var init1: Int=99999
+  var sum:  Int=0
+  for(i<-Range(0,maxes)){
+    init1 = max_below(input,init1)
+    sum +=init      }
+  return sum
+  }
 
 // Part 1
 println(sum_maxes("input.txt", 1))
