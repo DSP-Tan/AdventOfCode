@@ -9,11 +9,8 @@ var tot: Int=0
 var half: Int=0
 for(sack<- Sacks){
   half=sack.size/2
-  for(j<- ( Set( sack.slice(0,half) ).intersect( Set(sack.slice(half, sack.size ) ) ) ).toString )
-    // This doesn't work becuse it is a set of one element which is a string.
-    // We need a set of separate chars, and that is not done this way.
-    tot
-    // += priority(j)
+  for(j<- ( sack.slice(0,half).toSet & sack.slice(half, sack.size ).toSet  ) )
+    tot += priority(j)
   }
 println(tot)
 
@@ -22,4 +19,3 @@ println(tot)
 //     | flort +=i
 //     | }
 
-println(priority('A'))
