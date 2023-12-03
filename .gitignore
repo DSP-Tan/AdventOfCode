@@ -1,2 +1,6 @@
 input.txt
+input*.txt
 example.txt
+example*.txt
+*[Jj]ules*
+.ipynb
