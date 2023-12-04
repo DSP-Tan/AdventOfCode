@@ -12,4 +12,4 @@ print(sum( 2**(card[0]-1)  for card in Cards if card[0] ) )
 for i, card in enumerate(Cards):
     for j in range(card[0]):
         Cards[i+j+1][1] +=card[1]
-print(sum(i[1] for i in Cards) )
+print(sum(card[1] for card in Cards) )
