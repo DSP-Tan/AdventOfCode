@@ -1,10 +1,9 @@
-Lines = [ line.strip('\n') for line in open("example.txt", 'r').readlines() ]
+import sys
+Lines = [ line.strip('\n') for line in open(sys.argv[1], 'r').readlines() ]
 
-seeds=[]
 class Transfer:
     def __init__(self, name):
         self.name   = name
-        self.ranges = []
         self.read   = False
         self.dicto  = {}
 
@@ -13,8 +12,6 @@ trans=["seed-to-soil","soil-to-fert","fertilizer-to-water",
        "humidity-to-location"]
 
 transfers = [Transfer(i) for i in trans]
-s2s=[]
-seed_to_soil=False
 for line in Lines:
     if "seeds:" in line:
         seeds = [int(i) for i in line.split("seeds:")[1].split()]
@@ -26,36 +23,35 @@ for line in Lines:
             trans.read=False
             break
         if trans.read:
-            #trans.ranges.append([int(i) for i in line.split()])
             dst, src, rng = [int(i) for i in line.split()]
             source= range(src, src + rng )
             dest=   range(dst, dst + rng )
             for j, k in zip(source, dest):
                 trans.dicto[j]=k
 
-        #s2s.append([int(i) for i in line.split()])
 
 print(seeds)
-#for i in transfers:
-#    print(i.name)
-#    print(i.ranges)
+for i in transfers:
+    print(i.name)
+    #print(i.ranges)
 
-s2s= transfers[0]
-#print(s2s.ranges)
+entities=[seeds]
+old = new =seeds
+for i, trans in enumerate(transfers):
+    old = new
+    new = [ trans.dicto[j] if j in trans.dicto else j for j in old ]
 
-dicto={}
-for i in s2s.ranges:
-    source= range(i[1],i[1]+i[2] )
-    dest=   range(i[0],i[0]+i[2] )
-    for j,k in zip(source, dest):
-        dicto[j]=k
-#print(dicto)
-soils=[]
-for i in seeds:
-    if i in dicto:
-        soils.append(dicto[i])
-    else:
-        soils.append(i)
-print(soils)
-print(dicto)
-print(transfers[0].dicto==dicto)
+for i in new:
+    print(i)
+
+print("\n\n")
+print(min(new))
+#print(min(entities[-1]))
+
+#print(soils)
+#soils=[]
+#for i in seeds:
+#    if i in dicto:
+#        soils.append(dicto[i])
+#    else:
+#        soils.append(i)
