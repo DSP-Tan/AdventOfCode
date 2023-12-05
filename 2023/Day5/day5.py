@@ -6,6 +6,7 @@ class Transfer:
         self.name   = name
         self.read   = False
         self.dicto  = {}
+        self.ranges = []
 
 trans=["seed-to-soil","soil-to-fert","fertilizer-to-water",
        "water-to-light","light-to-temp","temperature-to-humid",
@@ -24,6 +25,7 @@ for line in Lines:
             break
         if trans.read:
             dst, src, rng = [int(i) for i in line.split()]
+            trans.ranges.append([dst, src, rng])
             source= range(src, src + rng )
             dest=   range(dst, dst + rng )
             for j, k in zip(source, dest):
@@ -43,15 +45,24 @@ for i, trans in enumerate(transfers):
 
 for i in new:
     print(i)
-
 print("\n\n")
 print(min(new))
-#print(min(entities[-1]))
 
-#print(soils)
-#soils=[]
-#for i in seeds:
-#    if i in dicto:
-#        soils.append(dicto[i])
-#    else:
-#        soils.append(i)
+print(seeds)
+#print(transfers[0].ranges)
+soils=[]
+olds= seeds
+for transfer in transfers:
+    news=[]
+    for old in olds:
+        new = old
+        for range in transfer.ranges:
+            dst, src, rng = range
+            if src<= old < src +rng:
+                differ = dst -src
+                new = old+differ
+                break
+        news.append(new)
+
+    olds=news
+print(news)
