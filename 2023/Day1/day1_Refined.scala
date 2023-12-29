@@ -23,13 +23,19 @@ object Main {
     (-1,wordBuff.mkString)
   }
 
-  def countWords( line:String): Int = {
+  def countWords( line:String ): Int = {
     var wordI = getNextWord(0, line)._1
     var count = 0
     while( wordI != -1 ){
       count +=1
       wordI = getNextWord(wordI, line)._1
     }
+    return count
+  }
+  def recurseCount( line:String, start:Int, count:Int ): Int = {
+    val wordI = getNextWord(start, line)._1
+    if( wordI != -1 )
+      recurseCount(line, wordI, count+1)
     return count
   }
 
@@ -55,30 +61,41 @@ object Main {
       scala.sys.exit(1)
       }
 
-    val combs1: Array[Int] = for (line<- Lines) yield {
-      val numbers  = getInts(line)
-      //val intFirst = numbers(0).toInt -48
-      //val intLast  = numbers.last.toInt -48
-
-      //intFirst*10+intLast
-
-      1
-      }
-    println(combs1.sum)
-
-    val combs2: Array[Int] = for (line<- Lines) yield {
-      val numbers  = getInts(line)
-      //val intFirst = numbers(0).toInt -48
-      //val intLast  = numbers.last.toInt -48
-      //val iFirst   = line.indexOf(numbers(0))
-      //val iLast    = line.indexOf(numbers.last)
-      //val intComb  = intFirst*10+intLast
-      val fart: (Int,String) = getNextWord(0,line)
+    // Let's iterate through the lines and test all our functions
+    for (line<- Lines) {
       println(line)
-      println(fart._1, fart._2)
-      1
-      //intComb
-      }
+      val numbers= getInts(line)
+      numbers.foreach(s=>printf("%c ",s))
+      println
+      val N_words = countWords(line)
+      val Nr_words = recurseCount(line,0,0)
+      println(s"Imperative count ${N_words} words")
+      println(s"Recursive  count ${N_words} words")
+    }
+
+    //val combs1: Array[Int] = for (line<- Lines) yield {
+    //  val numbers  = getInts(line)
+    //  val intFirst = numbers(0).toInt -48
+    //  val intLast  = numbers.last.toInt -48
+    //  intFirst*10+intLast
+    //  //1
+    //  }
+    //println(combs1.sum)
+
+    //val combs2: Array[Int] = for (line<- Lines) yield {
+    //  val numbers  = getInts(line)
+    //  //val intFirst = numbers(0).toInt -48
+    //  //val intLast  = numbers.last.toInt -48
+    //  //val iFirst   = line.indexOf(numbers(0))
+    //  //val iLast    = line.indexOf(numbers.last)
+    //  //val intComb  = intFirst*10+intLast
+    //  val fart: (Int,String) = getNextWord(0,line)
+    //  println(line)
+    //  println(s"${fart._1}")
+    //  println(s"${fart._2}")
+    //  1
+    //  //intComb
+    //  }
     //println(combs2.sum)
     }
 
