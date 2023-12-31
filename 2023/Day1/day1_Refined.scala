@@ -36,7 +36,7 @@ object Main {
   def recurseCount( line:String, start:Int, count:Int ): Int = {
     val wordI = getNextWord(start, line)._1
     if( wordI != -1 ) recurseCount(line, wordI, count+1)
-    return count
+    else count
   }
 
   def recurseGet( line:String, start:Int, words:Array[String] ): Array[String] = {
@@ -46,17 +46,6 @@ object Main {
     else
       words
   }
-
-  //def getWordNums(line:String): Array[(String,Int)] = {
-  //  var i = 0
-  //  do {
-  //    val iWord = getNextWord(i,line)
-  //    i+=1
-  //    iWord
-  //  } while ( iWord._1 != -1)
-  //  Array((fart._1, fart._2))
-
-  //}
 
   def main(args: Array[String]): Unit = {
 
@@ -72,16 +61,16 @@ object Main {
     // Let's iterate through the lines and test all our functions
     for (line<- Lines) {
       println(line)
-      //val numbers= getInts(line)
-      //numbers.foreach(s=>printf("%c ",s))
-      //println
-      //val N_words = countWords(line)
-      //val Nr_words = recurseCount(line,0,0)
-      //println(s"Imperative count ${N_words} words")
-      //println(s"Recursive  count ${N_words} words")
-      val words = recurseGet(line, 0, Array[String]())
-      words.foreach(s=>printf("%s ",s))
-      println()
+      val numbers= getInts(line)
+      numbers.foreach(s=>printf("%c ",s))
+      println
+      val N_words = countWords(line)
+      val Nr_words = recurseCount(line,0,0)
+      println(s"Imperative count ${N_words} words")
+      println(s"Recursive  count ${Nr_words} words")
+      //val words = recurseGet(line, 0, Array[String]())
+      //words.foreach(s=>printf("%s ",s))
+      //println()
     }
 
     //val combs1: Array[Int] = for (line<- Lines) yield {
