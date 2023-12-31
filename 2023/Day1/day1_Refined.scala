@@ -61,21 +61,21 @@ object Main {
       println
     }
 
-    //val combs1: Array[Int] = for (line<- Lines) yield {
-    //  val numbers  = getInts(line)
-    //  val intFirst = numbers(0).toInt -48
-    //  val intLast  = numbers.last.toInt -48
-    //  intFirst*10+intLast
-    //  //1
-    //  }
-    //println(combs1.sum)
+    val combs1: Array[Int] = for (line<- Lines) yield {
+      val numbers  = getInts(line)
+      val intFirst = numbers(0).toInt -48
+      val intLast  = numbers.last.toInt -48
+      intFirst*10+intLast
+      }
+    println("Part 1:")
+    println(combs1.sum)
 
     //val combs2: Array[Int] = for (line<- Lines) yield {
     //  val numbers  = getInts(line)
     //  //val intFirst = numbers(0).toInt -48
     //  //val intLast  = numbers.last.toInt -48
     //  //val iFirst   = line.indexOf(numbers(0))
-    //  //val iLast    = line.indexOf(numbers.last)
+    //  //val iLast    = line.length-1-line.reverse.indexOf(numbers.last)
     //  //val intComb  = intFirst*10+intLast
     //  val fart: (Int,String) = getNextWord(0,line)
     //  println(line)
