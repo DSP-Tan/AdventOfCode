@@ -23,16 +23,6 @@ object Main {
     (-1,wordBuff.mkString)
   }
 
-  def countWords( line:String ): Int = {
-    var wordI = getNextWord(0, line)._1
-    var count = 0
-    while( wordI != -1 ){
-      count +=1
-      wordI = getNextWord(wordI, line)._1
-    }
-    return count
-  }
-
   def recurseCount( line:String, start:Int, count:Int ): Int = {
     val wordI = getNextWord(start, line)._1
     if( wordI != -1 ) recurseCount(line, wordI, count+1)
@@ -64,9 +54,7 @@ object Main {
       val numbers= getInts(line)
       numbers.foreach(s=>printf("%c ",s))
       println
-      val N_words = countWords(line)
       val Nr_words = recurseCount(line,0,0)
-      println(s"Imperative count ${N_words} words")
       println(s"Recursive  count ${Nr_words} words")
       //val words = recurseGet(line, 0, Array[String]())
       //words.foreach(s=>printf("%s ",s))
