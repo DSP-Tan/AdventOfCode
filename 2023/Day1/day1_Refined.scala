@@ -32,11 +32,18 @@ object Main {
     }
     return count
   }
+
   def recurseCount( line:String, start:Int, count:Int ): Int = {
     val wordI = getNextWord(start, line)._1
-    if( wordI != -1 )
-      recurseCount(line, wordI, count+1)
+    if( wordI != -1 ) recurseCount(line, wordI, count+1)
     return count
+  }
+  def recurseGet( line:String, start:Int, words:Array[String] ): Array[String] = {
+    val word = getNextWord(start, line)
+    val wordz = words :+ word._2
+    if( word._1 != -1 )
+      recurseGet(line, word._1 , wordz )
+    return wordz
   }
 
   //def getWordNums(line:String): Array[(String,Int)] = {
