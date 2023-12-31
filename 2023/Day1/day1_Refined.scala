@@ -42,14 +42,14 @@ object Main {
   def recurseGet( line:String, start:Int, words:Array[String] ): Array[String] = {
     val word = getNextWord(start, line)
     if( word._1 != -1 ){
-      //println(word._2)
-      //(words :+ word._2).foreach(s=>printf("%s ",s))
       println(s"In recurseGet, length: ${words.length}")
+      println(s"In recurseGet, index: ${word._1}")
       recurseGet(line, word._1 , words :+ word._2)
+    } else {
+      println(s"End recurseGet, length: ${words.length}")
+      println(s"End recurseGet, index: ${word._1}")
+      words
     }
-    println(s"End recurseGet, length: ${words.length}")
-    println(s"End recurseGet, index: ${word._1}")
-    words
   }
 
   //def getWordNums(line:String): Array[(String,Int)] = {
