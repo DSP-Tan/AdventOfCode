@@ -41,15 +41,10 @@ object Main {
 
   def recurseGet( line:String, start:Int, words:Array[String] ): Array[String] = {
     val word = getNextWord(start, line)
-    if( word._1 != -1 ){
-      println(s"In recurseGet, length: ${words.length}")
-      println(s"In recurseGet, index: ${word._1}")
+    if( word._1 != -1 )
       recurseGet(line, word._1 , words :+ word._2)
-    } else {
-      println(s"End recurseGet, length: ${words.length}")
-      println(s"End recurseGet, index: ${word._1}")
+    else
       words
-    }
   }
 
   //def getWordNums(line:String): Array[(String,Int)] = {
@@ -86,7 +81,7 @@ object Main {
       //println(s"Recursive  count ${N_words} words")
       val words = recurseGet(line, 0, Array[String]())
       words.foreach(s=>printf("%s ",s))
-      println(words.length)
+      println()
     }
 
     //val combs1: Array[Int] = for (line<- Lines) yield {
