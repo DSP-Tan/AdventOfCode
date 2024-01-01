@@ -60,10 +60,10 @@ object Main {
       (intFirst*10+intLast, intOne*10+intTwo)
       }
     println("Part 1:")
-    println(combs.sum)
+    println(combs.map(s=>s._1).sum)
 
     println("Part 2:")
-    println(combs.sum)
+    println(combs.map(s=>s._2).sum)
     }
 
 }
