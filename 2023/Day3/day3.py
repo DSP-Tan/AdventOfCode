@@ -42,7 +42,6 @@ def look_around_stars(star_locs, parts):
                     continue
                 if (i+dx,j+dy) in loc:
                     count +=1
-                    #print(f"star {(i,j)} touches part {(i+dx,j+dy)}; count={count}")
                     partVals.append(partVal)
                     found=True
     return (count,partVals)
@@ -61,8 +60,7 @@ def look_around(i, j, Lines):
 import sys
 if __name__=='__main__':
     Lines = [ line.strip('\n') for line in open(sys.argv[1], 'r').readlines() ]
-    for i in Lines:
-        print(i)
+    for i in Lines: print(i)
     numbers=get_numbers(Lines)
     stars=get_stars(Lines)
 
