@@ -7,7 +7,8 @@ object Main {
   val wordNums: Array[String] =
     Array("one","two","three","four","five","six","seven","eight","nine")
   val wordToNum =
-    Map("one"->1,"two"->2,"three"->3,"four"->4,"five"->5,"six"->6,"seven"->7,"eight"->8,"nine"->9)
+    Map("zero"->0, "one"->1,"two"->2,"three"->3,"four"->4,
+        "five"->5,"six"->6,"seven"->7,"eight"->8,"nine"->9)
 
   def getNextWord(start:Int, line:String): (Int,String) = {
     val wordBuff: Array[Char] = Array('0','0','0','0','0')
@@ -49,17 +50,12 @@ object Main {
       }
 
     // Let's iterate through the lines and test all our functions
-    for (line<- Lines) {
-      println(line)
-      val numbers= getInts(line)
-      numbers.foreach(s=>printf("%c ",s))
-      println
-      val Nr_words = recurseCount(line,0,0)
-      println(s"Recursive  count ${Nr_words} words")
-      val words = recurseGet( line, 0, Array[(Int,String)]() )
-      words.foreach(s=>printf("%s ",s._2))
-      println
-    }
+    //for (line<- Lines) {
+    //  println(line)
+    //  val words = recurseGet( line, 0, Array[(Int,String)]() )
+    //  words.foreach(s=>printf("%s ",s._2))
+    //  println
+    //}
 
     val combs1: Array[Int] = for (line<- Lines) yield {
       val numbers  = getInts(line)
@@ -70,21 +66,24 @@ object Main {
     println("Part 1:")
     println(combs1.sum)
 
-    //val combs2: Array[Int] = for (line<- Lines) yield {
-    //  val numbers  = getInts(line)
-    //  //val intFirst = numbers(0).toInt -48
-    //  //val intLast  = numbers.last.toInt -48
-    //  //val iFirst   = line.indexOf(numbers(0))
-    //  //val iLast    = line.length-1-line.reverse.indexOf(numbers.last)
-    //  //val intComb  = intFirst*10+intLast
-    //  val fart: (Int,String) = getNextWord(0,line)
-    //  println(line)
-    //  println(s"${fart._1}")
-    //  println(s"${fart._2}")
-    //  1
-    //  //intComb
-    //  }
-    //println(combs2.sum)
+    val combs2: Array[Int] = for (line<- Lines) yield {
+      val numbers  = getInts(line)
+      val intFirst = numbers(0).toInt -48
+      val intLast  = numbers.last.toInt -48
+      val iFirst   = line.indexOf(numbers(0))
+      val iLast    = line.length-1-line.reverse.indexOf(numbers.last)
+
+      val words = recurseGet( line, 0, Array[(Int,String)]() )
+      val wordFirst = if (words.length >0 ) words(0)   else (iFirst+1,"zero")
+      val wordLast  = if (words.length >0 ) words.last else (-1,"zero")
+
+      val intOne = if (iFirst < wordFirst._1) intFirst else wordToNum(wordFirst._2)
+      val intTwo = if (iLast  > wordLast._1 ) intLast  else wordToNum(wordLast._2 )
+
+      intOne*10+intTwo
+      }
+    println("Part 2:")
+    println(combs2.sum)
     }
 
 }
