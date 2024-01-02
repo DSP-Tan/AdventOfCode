@@ -1,13 +1,13 @@
 import scala.io.Source
 
 object Main {
-  def getInts(line: String): Array[Char] =
-    for (letter <- line.toArray if letter.isDigit) yield letter
+  def getInts(line: String): List[Char] =
+    for (letter <- line.toList if letter.isDigit) yield letter
 
-  val wordNums: Array[String] =
-    Array("one","two","three","four","five","six","seven","eight","nine")
+  val wordNums: List[String] =
+    List("one","two","three","four","five","six","seven","eight","nine")
   val wordToNum =
-    Map("zero"->0, "one"->1,"two"->2,"three"->3,"four"->4,
+    Map("zero"->0,"one"->1,"two"->2,"three"->3,"four"->4,
         "five"->5,"six"->6,"seven"->7,"eight"->8,"nine"->9)
 
   def getNextWord(start:Int, line:String): (Int,String) = {
@@ -30,7 +30,7 @@ object Main {
     else count
   }
 
-  def recurseGet( line:String, start:Int, words:Array[(Int,String)] ): Array[(Int,String)] = {
+  def recurseGet( line:String, start:Int, words:List[(Int,String)] ): List[(Int,String)] = {
     val word = getNextWord(start, line)
     if( word._1 != -1 )
       recurseGet(line, word._1 , words :+ word)
@@ -40,9 +40,9 @@ object Main {
 
   def main(args: Array[String]): Unit = {
 
-    val Lines: Array[String] =
-      if   (args.length > 0) Source.fromFile(args(0)).getLines.toArray
-      else Array[String]()
+    val Lines: List[String] =
+      if   (args.length > 0) Source.fromFile(args(0)).getLines.toList
+      else Nil
 
     if (Lines.length == 0){
       println("Please enter file name")
@@ -52,12 +52,12 @@ object Main {
     // Let's iterate through the lines and test all our functions
     //for (line<- Lines) {
     //  println(line)
-    //  val words = recurseGet( line, 0, Array[(Int,String)]() )
+    //  val words = recurseGet( line, 0, Nil )
     //  words.foreach(s=>printf("%s ",s._2))
     //  println
     //}
 
-    val combs1: Array[Int] = for (line<- Lines) yield {
+    val combs1: List[Int] = for (line<- Lines) yield {
       val numbers  = getInts(line)
       val intFirst = numbers(0).toInt -48
       val intLast  = numbers.last.toInt -48
@@ -66,14 +66,14 @@ object Main {
     println("Part 1:")
     println(combs1.sum)
 
-    val combs2: Array[Int] = for (line<- Lines) yield {
+    val combs2: List[Int] = for (line<- Lines) yield {
       val numbers  = getInts(line)
       val intFirst = numbers(0).toInt -48
       val intLast  = numbers.last.toInt -48
       val iFirst   = line.indexOf(numbers(0))
       val iLast    = line.length-1-line.reverse.indexOf(numbers.last)
 
-      val words = recurseGet( line, 0, Array[(Int,String)]() )
+      val words = recurseGet( line, 0, Nil )
       val wordFirst = if (words.length >0 ) words(0)   else (iFirst+1,"zero")
       val wordLast  = if (words.length >0 ) words.last else (-1,"zero")
 
