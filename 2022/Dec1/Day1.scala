@@ -16,10 +16,10 @@ def max_below(input:String, below: Int): Int ={
   }
 
 def sum_maxes(input: String, maxes: Int): Int ={
-  var init1: Int=99999
+  var init: Int=99999
   var sum:  Int=0
   for(i<-Range(0,maxes)){
-    init1 = max_below(input,init1)
+    init = max_below(input,init)
     sum +=init      }
   return sum
   }

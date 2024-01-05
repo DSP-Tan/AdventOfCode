@@ -7,4 +7,9 @@ val elfString  =  scala.io.Source.fromFile("input.txt").mkString.split("\n\n")
 val elves      =  elfString.map( s=>s.split("\n").map(s=>s.toInt ) )
 // Each array of ints is summed, then we have an array of Ints.
 val elfCals    =  elves.map(  s=>s.sum )
+
+// Part 1
 println(elfCals.max)
+
+// Part 2
+println(elfCals.sortBy(-_).take(3).sum)
