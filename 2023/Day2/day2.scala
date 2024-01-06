@@ -35,13 +35,16 @@ object Main {
 
     // part 1
     val rMax = 12; val bMax = 14; val gMax = 13
-    def possGame(tupArray: Array[(Int,Int,Int)]) : Boolean = {
+    def possGame(tupArray: Array[(Int,Int,Int)]) : Boolean =
       tupArray.forall(s=> s._1 <= rMax && s._2 <= bMax && s._3 <=gMax)
-    }
-    // maybe make a function and do a filter and then you can just
-    // select out the possible games.
-    println(tupTriplets.filter(s=> possGame(s) ).length )
-    tupTriplets.filter(s=> possGame(s) ).foreach(s=> s.foreach(println) )
+
+    val possibleAndIndex = tupTriplets.zipWithIndex.filter(s => possGame(s._1) )
+    println(possibleAndIndex.map(_._2+1).sum)
+
+    // part 2
+    def maxPower(tupArray: Array[(Int,Int,Int)]) : Int =
+      tupArray.map(_._1).max*tupArray.map(_._2).max*tupArray.map(_._3).max
+    println(tupTriplets.map(maxPower(_)).sum )
 
 
     }
