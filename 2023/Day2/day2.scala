@@ -31,16 +31,17 @@ object Main {
       val greenz = if(green.isEmpty) 0 else green.mkString.toInt
       (redz,bluez,greenz)
     }
-    tupTriplets(1).foreach(println)
+    //tupTriplets(1).foreach(println)
 
     // part 1
     val rMax = 12; val bMax = 14; val gMax = 13
+    def possGame(tupArray: Array[(Int,Int,Int)]) : Boolean = {
+      tupArray.forall(s=> s._1 <= rMax && s._2 <= bMax && s._3 <=gMax)
+    }
     // maybe make a function and do a filter and then you can just
     // select out the possible games.
-    for(tupTrip<-tupTriplets) {
-      for(tuple<-tupTrip)
-         tuple._1 <= rMax && tuple._2 <= bMax && tuple._3 <=gMax
-    }
+    println(tupTriplets.filter(s=> possGame(s) ).length )
+    tupTriplets.filter(s=> possGame(s) ).foreach(s=> s.foreach(println) )
 
 
     }
