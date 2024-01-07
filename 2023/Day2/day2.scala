@@ -12,7 +12,7 @@ object Main {
       println("Please enter file name")
       scala.sys.exit(1)
       }
-    Lines.foreach(println)
+    //Lines.foreach(println)
 
     // Convert each draw into 3 numbers, and then check each of these three
     // for a condition. We can use a tuple: (R,G,B)
@@ -21,9 +21,8 @@ object Main {
       for (draws <- Games) yield for(draw<-draws) yield {
       val colours = draw.split(",")
 
-      //colours.foreach(s=> printf("[%s] ",s))
-      val red   = for(colour<-colours; if colour.contains("red"); letter<-colour;   if letter.isDigit) yield letter
-      val blue  = for(colour<-colours; if colour.contains("blue"); letter<-colour;  if letter.isDigit) yield letter
+      val red   = for(colour<-colours; if colour.contains("red");   letter<-colour; if letter.isDigit) yield letter
+      val blue  = for(colour<-colours; if colour.contains("blue");  letter<-colour; if letter.isDigit) yield letter
       val green = for(colour<-colours; if colour.contains("green"); letter<-colour; if letter.isDigit) yield letter
 
       val redz   = if(red.isEmpty)   0 else red.mkString.toInt
@@ -31,7 +30,6 @@ object Main {
       val greenz = if(green.isEmpty) 0 else green.mkString.toInt
       (redz,bluez,greenz)
     }
-    //tupTriplets(1).foreach(println)
 
     // part 1
     val rMax = 12; val bMax = 14; val gMax = 13
