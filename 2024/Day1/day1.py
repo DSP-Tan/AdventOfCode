@@ -1,4 +1,3 @@
-#input="example.txt"
 input="input.txt"
 lists=  [i.strip("\n").split() for i in open(input,"r").readlines() ]
 
