@@ -20,14 +20,12 @@ Lists = [ [int(i) for i in line.split()] for line in Lines]
 safe=0
 dampedSafe=0
 for nums in Lists:
-
     diffs = [nums[i+1] - nums[i] for i in range(len(nums)-1) ]
     good = checkMonotonic(diffs) and checkSpaces(diffs)
 
     safe = safe + good
     if not (good):
         good = problemDampner(nums)
-
     dampedSafe = dampedSafe + (good)
 
 print(safe)
