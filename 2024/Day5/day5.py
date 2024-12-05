@@ -1,10 +1,3 @@
-
-# The repition that is being removed by doing "set(bads)" should probably
-# j ust be avoided here. This algorithm should be better made
-
-# This problem would be cool to solve in C by just passing the rules as the comparison
-# function to quickSort.
-
 from math import ceil
 pageLists = [[int(j) for j in i.strip("\n").split(",")] for i in open("input_pages.txt","r").readlines()]
 rules     = [[int(j) for j in i.strip("\n").split("|")] for i in open("input_orders.txt").readlines() ]
@@ -33,12 +26,11 @@ def getBrokenRules(pageList, filtered_rules):
     return list(set(bads))
 
 def applyRules(pageList,bads):
-    for badTup in list(set(bads)):
+    for badTup in bads:
         pageList[pageList.index(badTup[0])] = badTup[1]
         pageList[pageList.index(badTup[1])] = badTup[0]
     return pageList
 
-numBads = 0
 sumMids=0
 sumMidBads=0
 
@@ -54,9 +46,5 @@ for pageList in pageLists:
             applyRules(pageList,bads )
 
         sumMidBads += pageList[ceil(len(pageList)/2)-1]
-
-    numBads  += int(bool(bads))
-print(f"{numBads} of these lists are bad.")
-print(f"{len(pageLists)-numBads} of these lists are good.")
 print(f"{sumMids} is the sum of the midpoints of goods.")
 print(f"{sumMidBads} is the sum of the midpoints of Bads.")
