@@ -28,21 +28,15 @@ int main(){
       if(c=='\n') continue;
       else        lines[i][j]=c;
       }
-  //printf("Original Map:");
-  //printMap(lines, n);
 
   char **lines0 = (char **)malloc(n * sizeof(char *));
   for (i=0; i<n; i++) lines0[i] = (char *)malloc(n * sizeof(char));
   for (i=0; i<n; i++) for(j=0;j<n;j++) lines0[i][j]=lines[i][j];
 
-  /*--------------------------------------------------------------------------*/
-  /*--------------------------------------------------------------------------*/
-  // First Walk
   printf("First walk:\n");
   cnt=0;
   dir = getPositionDir(lines, n,  pos);
   pos0[0]=pos[0]; pos0[1]=pos[1];
-
   cnt += walk(lines, n, pos,0);
   //printMap(lines, n);
 
